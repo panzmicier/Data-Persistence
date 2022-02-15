@@ -5,10 +5,13 @@ using UnityEngine;
 
 public class DeathZone : MonoBehaviour
 {
-    public MainManager Manager;
+    [SerializeField] MainManager Manager;
+    [SerializeField] AudioClip _crashSound;
 
     private void OnCollisionEnter(Collision other)
     {
+        var audioSource = GetComponent<AudioSource>();
+        audioSource.PlayOneShot(_crashSound, 1.0f);
         Destroy(other.gameObject);
         Manager.GameOver();
     }

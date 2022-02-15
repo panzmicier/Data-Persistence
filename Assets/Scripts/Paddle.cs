@@ -4,17 +4,15 @@ using UnityEngine;
 
 public class Paddle : MonoBehaviour
 {
-    public float Speed = 2.0f;
-    public float MaxMovement = 2.0f;
-    
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] float Speed = 2.0f;
+    [SerializeField] float MaxMovement = 2.0f;
+
+    void Update()
     {
-        
+        MovePaddle();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void MovePaddle()
     {
         float input = Input.GetAxis("Horizontal");
 

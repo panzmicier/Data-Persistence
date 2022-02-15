@@ -7,11 +7,15 @@ using UnityEngine.Events;
 public class Brick : MonoBehaviour
 {
     public UnityEvent<int> onDestroyed;
-    
+
     public int PointValue;
+
+    [SerializeField] AudioClip _bounceSound;
+    private AudioSource _audioSource;
 
     void Start()
     {
+        _audioSource = GetComponent<AudioSource>();
         var renderer = GetComponentInChildren<Renderer>();
 
         MaterialPropertyBlock block = new MaterialPropertyBlock();
@@ -35,6 +39,7 @@ public class Brick : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
+        _audioSource.PlayOneShot(_bounceSound, 1.0f);
         onDestroyed.Invoke(PointValue);
         
         //slight delay to be sure the ball have time to bounce
